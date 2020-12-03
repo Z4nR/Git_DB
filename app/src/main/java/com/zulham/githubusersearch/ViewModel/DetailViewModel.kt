@@ -47,6 +47,8 @@ class DetailViewModel: ViewModel() {
 
                         detail.value = user
 
+                    } else {
+
                     }
 
 

@@ -5,7 +5,6 @@ import android.content.Context
 import android.database.Cursor
 import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
-import com.zulham.githubusersearch.Database.db.DatabaseContract.FavColumns.Companion.IS_FAV
 import com.zulham.githubusersearch.Database.db.DatabaseContract.FavColumns.Companion.TABLE_NAME
 import com.zulham.githubusersearch.Database.db.DatabaseContract.FavColumns.Companion.USER_NAME
 import com.zulham.githubusersearch.Database.db.DatabaseContract.FavColumns.Companion._ID
@@ -47,12 +46,12 @@ class FavHelper(context: Context) {
         return database.query(
                 DB_TABLE,
                 null,
+                "${DatabaseContract.FavColumns.IS_FAV} = '1'",
                 null,
                 null,
                 null,
                 null,
-                null,
-                "$_ID ASC"
+                null
         )
     }
 
@@ -60,7 +59,7 @@ class FavHelper(context: Context) {
         return database.query(
                 DB_TABLE,
                 null,
-                "$IS_FAV = ?",
+                "$USER_NAME = ?",
                 arrayOf(id),
                 null,
                 null,
