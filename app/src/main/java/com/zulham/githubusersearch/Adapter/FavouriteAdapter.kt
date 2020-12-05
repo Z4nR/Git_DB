@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.zulham.githubusersearch.Database.entity.FavUser
-import com.zulham.githubusersearch.Model.User
 import com.zulham.githubusersearch.R
 import kotlinx.android.synthetic.main.user.view.*
 
@@ -34,7 +33,7 @@ class FavouriteAdapter(private val favs: ArrayList<FavUser>) : RecyclerView.Adap
 
     private var onItemClickCallback: OnItemClickCallback? = null
 
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+    fun setOnItemClickCallback(param: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
     }
 

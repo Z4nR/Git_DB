@@ -63,7 +63,6 @@ class DetailActivity : AppCompatActivity() {
         showLoading(true)
 
         val user = intent.getParcelableExtra<User>("user")
-        val favs = intent.getParcelableExtra<FavUser>("favuser")
 
         detailViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(DetailViewModel::class.java)
 
@@ -71,12 +70,6 @@ class DetailActivity : AppCompatActivity() {
             sectionsPagerAdapter.username = it?.login
             detailViewModel.setDetail(it?.login)
         }
-
-        favs.let {
-            sectionsPagerAdapter.username = it?.UserName
-            detailViewModel.setDetail(it?.UserName)
-        }
-
 
         detailViewModel.getIsError().observe(this, Observer {
             when (it) {
@@ -117,8 +110,6 @@ class DetailActivity : AppCompatActivity() {
 
         detailViewModel.getDetail().observe(this, {
             detail(it)
-            favDetail(it)
-
             showLoading(false)
         })
 
@@ -153,18 +144,6 @@ class DetailActivity : AppCompatActivity() {
         contentValues.put(DatabaseContract.FavColumns.USER_ID, user.id)
         contentValues.put(DatabaseContract.FavColumns.USER_NAME, user.name)
         contentValues.put(DatabaseContract.FavColumns.IMG_USER, user.avatar_url)
-    }
-
-    private fun favDetail(favs: UserDetail) {
-        Glide.with(this@DetailActivity)
-                .load(favs.avatar_url)
-                .apply(RequestOptions().override(110, 110))
-                .into(userImage)
-
-        userName.text = favs.name
-        userLoc.text = favs.location
-        userComp.text = favs.company
-        userRepos.text = favs.repository.toString()
     }
 
     private fun showLoading(state: Boolean) {

@@ -3,19 +3,17 @@ package com.zulham.githubusersearch.View
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zulham.githubusersearch.Adapter.FavouriteAdapter
-import com.zulham.githubusersearch.Adapter.ListUserAdapter
 import com.zulham.githubusersearch.Database.db.FavHelper
 import com.zulham.githubusersearch.Database.entity.FavUser
 import com.zulham.githubusersearch.Database.helper.MappingHelper
-import com.zulham.githubusersearch.Model.User
 import com.zulham.githubusersearch.R
 import kotlinx.android.synthetic.main.activity_favourite.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.InternalCoroutinesApi
 
 class FavouriteActivity : AppCompatActivity() {
 
@@ -61,16 +59,6 @@ class FavouriteActivity : AppCompatActivity() {
         val favouriteAdapter = FavouriteAdapter(listFav)
 
         rv_FavUser.adapter = favouriteAdapter
-
-        favouriteAdapter.setOnItemClickCallback(object : FavouriteAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: FavUser) {
-                val intent = Intent(this@FavouriteActivity, DetailActivity::class.java)
-                val user = data
-                intent.putExtra("favuser", user)
-                startActivity(intent)
-            }
-
-        })
 
     }
 
